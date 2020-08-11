@@ -41,6 +41,9 @@ const BottomButtonLayout = ({ children }: BottomButtonLayoutProps) => {
         history.push('microGoal');
         break;
       case 'microGoal':
+        history.push('assignedDays');
+        break;
+      case 'assignedDays':
         history.push('period');
         break;
       case 'period':

@@ -1,0 +1,36 @@
+.assigned-days-input {
+  padding-left: 7px;
+
+  .heading {
+    color: var(--mainColor-1);
+    margin-bottom: 70px;
+  }
+
+  .guideline {
+    line-height: 16px;
+    margin-bottom: 100px;
+  }
+
+  .day-ratios {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    .ratio-item {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+
+  .day-graducations {
+    display: flex;
+    justify-content: space-between;
+    h1 {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  
+}

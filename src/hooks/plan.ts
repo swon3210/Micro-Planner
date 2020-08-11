@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import { RootState } from '../modules';
-import { Days, Plan } from '../apis/plan';
+import { Day, Plan } from '../apis/plan';
 import {
   setFinalGoal,
   setSemiGoal,
@@ -57,7 +57,7 @@ export const usePlanAction = () => {
   );
 
   const setAssignedDaysAction = useCallback(
-    (payload: Days[]) => {
+    (payload: Day[]) => {
       return dispatch(setAssignedDays(payload));
     },
     [dispatch]

@@ -1,0 +1,20 @@
+.ratio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.5s;
+  &:hover {
+    opacity: 0.7;
+  }
+  .ratio-inner-circle{
+    display: none;
+    width: 9px;
+    height: 9px;
+    background-color: var(--mainColor-1);
+    border-radius: 50%;
+    &.clicked {
+      display: block;
+    }
+  }
+}
