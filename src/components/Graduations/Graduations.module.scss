@@ -1,0 +1,13 @@
+.graduations {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .graduation-item {
+    opacity: 0.7;
+    transition: opacity 0.5s;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

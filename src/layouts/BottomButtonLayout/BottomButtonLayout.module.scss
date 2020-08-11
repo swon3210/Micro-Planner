@@ -1,0 +1,24 @@
+.bottom-button-layout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+
+  .content {
+    @media screen and (min-width: 1060px) {
+      width: 1060px;
+      margin: auto;
+    }
+  }
+
+  .bottom-button {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    .bottom-button-text {
+      font-size: 0.875rem;
+      color: white;
+    }
+  }
+}

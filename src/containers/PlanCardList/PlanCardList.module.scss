@@ -1,0 +1,75 @@
+.plan-card-list {
+  display: flex;
+  flex-direction: column;
+  .card-item {
+    margin-bottom: 10px;
+    opacity: 0.85;
+    .plan-card-left-content {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      .content-top {
+        .detail-plan {
+          color: white;
+          line-height: 1.1875rem;
+          margin-bottom: 10px;
+        }
+        .plan-when {
+          color: white;
+          margin-bottom: 7px;
+        }
+        .plan-where {
+          color: white;
+        }
+        
+      }
+      .content-bottom {
+        .plan-reserved-days {
+          color: white;
+          margin-bottom: 15px;
+        }
+        .plan-progress {
+          color: white;
+        }
+      }
+    }
+    .plan-card-right-content {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      
+      .content-top {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .main-plan {
+          font-size: 12.5px;
+        }
+        .elapsed-day {
+          font-size: 12px;
+        }
+      }
+      .remained-time {
+        font-size: 1.25rem;
+      }
+      .toggle-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+      }
+      .toggle-button-text {
+        color: white;
+        font-size: 14px;
+        margin-right: 14px;
+      }
+      .reserved-time {
+        color: white;
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

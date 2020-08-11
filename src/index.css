@@ -2,6 +2,12 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -36,6 +42,10 @@ ol, ul {
 blockquote, q {
 	quotes: none;
 }
+a {
+  text-decoration: none;
+  color: var(--mainColor-1);
+}
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
@@ -44,6 +54,9 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+#root {
+  height: 100%;
 }
 
 /* Colors */
@@ -58,6 +71,8 @@ table {
   --textColor-2: #4F4F4F;
   --textColor-3: #9B9B9B;
   --textColor-4: #D5D5D5;
+  
+  --backgroundColor: #F6F6F6;
 }
 
 /* Korean Fonts */

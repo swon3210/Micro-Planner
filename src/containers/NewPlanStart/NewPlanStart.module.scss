@@ -1,0 +1,14 @@
+.new-plan-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .title {
+    color: var(--mainColor-1);
+  }
+  .buttons {
+    margin-top: 160px;
+    .button {
+      margin-bottom: 12px;
+    }
+  }
+}
