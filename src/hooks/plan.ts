@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import { RootState } from '../modules';
-import { Days, Plan } from '../apis/plan';
+import { Day, Plan } from '../apis/plan';
 import {
   setFinalGoal,
   setSemiGoal,
@@ -57,7 +57,7 @@ export const usePlanAction = () => {
   );
 
   const setAssignedDaysAction = useCallback(
-    (payload: Days[]) => {
+    (payload: Day[]) => {
       return dispatch(setAssignedDays(payload));
     },
     [dispatch]
@@ -90,7 +90,6 @@ export const usePlanAction = () => {
     let db;
     request.onsuccess = function (event) {
       db = request.result;
-      console.log('스토어 접근 성공', event);
       const transaction = db.transaction('planStore', 'readwrite');
       const store = transaction.objectStore('planStore');
       const readAllRequest = store.getAll();

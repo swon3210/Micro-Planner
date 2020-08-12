@@ -19,46 +19,29 @@ interface PlanCardListProps {
 }
 
 const PlanCardList = ({ className, items }: PlanCardListProps) => {
-  const dummyItems = [
-    {
-      id: 1,
-      semiGoal: '하루에 글 5문단 쓰기',
-      finalGoal: '꾸준히 글쓰기',
-      assignedDays: ['월', '수', '금'],
-      assignedTime: "9:00 PM",
-      elapsedDay: 1,
-      where: '내 방 책상',
-      when: '저녁 9시',
-      progress: 0,
-      remainedTime: '00:00',
-    },
-    {
-      id: 2,
-      semiGoal: '하루에 글 5문단 쓰기',
-      finalGoal: '꾸준히 글쓰기',
-      assignedDays: ['월', '수', '금'],
-      assignedTime: "9:00 PM",
-      elapsedDay: 1,
-      where: '내 방 책상',
-      when: '저녁 9시',
-      progress: 0,
-      remainedTime: '00:00',
-    },
-    {
-      id: 3,
-      semiGoal: '하루에 글 5문단 쓰기',
-      finalGoal: '꾸준히 글쓰기',
-      assignedDays: ['월', '수', '금'],
-      assignedTime: "9:00 PM",
-      elapsedDay: 1,
-      where: '내 방 책상',
-      when: '저녁 9시',
-      progress: 0,
-      remainedTime: '00:00',
-    },
-  ];
 
   const cardItemList = items.map((item) => {
+
+    const now = new Date();
+    const then = new Date(item.timestamp);
+    const daysPassed = now.getDate() - then.getDate();
+    const assignedTime = new Date(item.assignedTime);
+    
+    let assignedHoursString = String(assignedTime.getHours());
+    let assignedMinutesString = String(assignedTime.getMinutes());
+    if (Number(assignedHoursString) < 10) {
+      assignedHoursString = '0' + assignedHoursString;
+    }
+    if (Number(assignedMinutesString) < 10) {
+      assignedMinutesString = '0' + assignedMinutesString;
+    }
+    
+    const hoursLeft = then.getHours() - Number(assignedHoursString);
+
+    // 내일이 되어야 앞으로 시간 나오게하자
+    // 넘기기 기능이 있어야할듯
+    // 넘기기 해서 START로 다시 할 수 있게 하자
+
     const leftContent = (
       <div className={cx('plan-card-left-content')}>
         <div className={cx('content-top')}>
@@ -83,12 +66,12 @@ const PlanCardList = ({ className, items }: PlanCardListProps) => {
         <div className={cx('content-top')}>
           <BoldHeading className={cx('main-plan')}>{item.finalGoal}</BoldHeading>
           {/* 여기 지난 날이랑 남은 시간 처리 해줘야 함 */}
-          <BoldHeading className={cx('elapsed-day')}>{item.timestamp} day</BoldHeading>
+          <BoldHeading className={cx('elapsed-day')}>{daysPassed} day</BoldHeading>
         </div>
-        <Paragraph className={cx('remained-time')}>{item.timestamp}</Paragraph>
+        <Paragraph className={cx('remained-time')}>{assignedHoursString}:{assignedMinutesString}</Paragraph>
         <ColoredRoundedButton className={cx('toggle-button')}>
-          <Paragraph className={cx('toggle-button-text')}>START</Paragraph>
-          <FaintedParagraph className={cx('reserved-time')}>{item.assignedTime}</FaintedParagraph>
+          <Paragraph className={cx('toggle-button-text')}>앞으로</Paragraph>
+          <FaintedParagraph className={cx('reserved-time')}>{hoursLeft}시간</FaintedParagraph>
         </ColoredRoundedButton>
       </div>
     );

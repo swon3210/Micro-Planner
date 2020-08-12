@@ -18,7 +18,7 @@ const initialState: PlanState = {
   data: [],
   currentData: {
     // id 가 '' 라는 것은 온라인 동기화가 이루어지지 않았다는 뜻이다.
-    id: '',
+    id: null,
     userId: '',
     finalGoal: '',
     semiGoal: '',
@@ -72,7 +72,9 @@ const plan = createReducer<PlanState, PlanAction>(initialState, {
   [ADD_PLAN]: (state, action) => {
     const processed = { ...state };
     const timestamp = new Date().getTime();
+    processed.currentData.id = timestamp;
     processed.currentData.timestamp = timestamp;
+    action.payload.id = timestamp;
     action.payload.timestamp = timestamp;
     processed.data.push(action.payload);
     return processed;
