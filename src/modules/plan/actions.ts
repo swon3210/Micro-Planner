@@ -1,5 +1,5 @@
 import { createAction } from "typesafe-actions";
-import { Days, Plan } from '../../apis/plan';
+import { Day, Plan } from '../../apis/plan';
 
 // 액션 타입
 export const SET_FINAL_GOAL = "plan/SET_FINAL_GOAL";
@@ -28,7 +28,7 @@ export const setAssignedPlace = createAction(
 )<string>();
 export const setAssignedDays = createAction(
   SET_ASSIGNED_DAYS
-)<Days[]>();
+)<Day[]>();
 export const setProgress = createAction(
   SET_PROGRESS
 )<number>();
