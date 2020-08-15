@@ -22,7 +22,7 @@ const initialState: PlanState = {
     userId: '',
     finalGoal: '',
     semiGoal: '',
-    assignedTime: 0,
+    assignedTime: '00:00',
     assignedPlace: '',
     assignedDays: [],
     timestamp: 0,

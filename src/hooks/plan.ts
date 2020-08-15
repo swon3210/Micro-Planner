@@ -6,6 +6,7 @@ import {
   setFinalGoal,
   setSemiGoal,
   setAssignedPlace,
+  setAssignedTime,
   setAssignedDays,
   setProgress,
   setPeriod,
@@ -40,14 +41,12 @@ export const usePlanAction = () => {
     [dispatch]
   );
 
-  // const setAssignedTimeAction = useCallback(
-  //   // timeText 형식 : 오후 7:00 에
-  //   (timeText: string) => {
-  //     let parsed = timeText.split(':');
-  //     return dispatch(setAssignedTime(payload));
-  //   },
-  //   [dispatch]
-  // );
+  const setAssignedTimeAction = useCallback(
+    (payload: string) => {
+      return dispatch(setAssignedTime(payload));
+    },
+    [dispatch]
+  );
 
   const setAssignedPlaceAction = useCallback(
     (payload: string) => {
@@ -106,12 +105,12 @@ export const usePlanAction = () => {
       console.log('에러 발생 : ', (error.target as any).error);
     };
     // return dispatch(setAllPlan(allPlan));
-  }, [dispatch])
+  }, [dispatch]);
 
   return {
     setFinalGoalAction,
     setSemiGoalAction,
-    // setAssignedTimeAction,
+    setAssignedTimeAction,
     setAssignedPlaceAction,
     setAssignedDaysAction,
     setProgressAction,

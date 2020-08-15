@@ -6,6 +6,7 @@ import {
   BoldSpan,
   Paragraph,
 } from '../../elements/Text/Text';
+import { TimeInput } from '../../elements/Input/Input';
 import InputBox, { InputObj } from '../../components/InputBox/InputBox';
 
 // Hooks
@@ -23,26 +24,27 @@ const MicroGoalInput = ({ className }: MicroGoalInputProps) => {
   const layoutAction = useLayoutAction();
   const planAction = usePlanAction();
   const planState = usePlanState();
-  // const time = planState.currentData.assignedTime;
-  const place = planState.currentData.assignedPlace;
-
 
   useEffect(() => {
-    if (place.length !== 0) {
+    if (planState.currentData.assignedPlace.length !== 0) {
       layoutAction.setLayoutButtonFuncAction(() => {
-        // planAction.setAssignedTimeAction(time);
-        planAction.setAssignedPlaceAction(place);
+        planAction.setAssignedPlaceAction(planState.currentData.assignedPlace);
+        planAction.setAssignedTimeAction(planState.currentData.assignedTime);
       });
     } else {
       layoutAction.setLayoutButtonFuncAction(undefined);
     }
-  }, [place]);
+  }, [planState.currentData.assignedPlace]);
 
-  // const dummyInputItems = ["저녁 9시", "내방 책상에서"]
-  const dummyInputItems: InputObj[] = [
-    // { id: 1, text: "저녁 9시", onChangeHandler: planAction.setAssignedTimeAction},
-    { id: 2, text: place, onChangeHandler: planAction.setAssignedPlaceAction},
-  ]
+  const items: InputObj[] = [
+    { id: 2, text: planState.currentData.assignedPlace, onChangeHandler: planAction.setAssignedPlaceAction},
+  ];
+
+  const onTimeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value;
+    planAction.setAssignedTimeAction(value);
+    console.log('value', value);
+  }
   
   return (
     <div className={cx('micro-goal-input', className)}>
@@ -51,7 +53,14 @@ const MicroGoalInput = ({ className }: MicroGoalInputProps) => {
         행동패턴을<BoldSpan>꾸준히 반복</BoldSpan>할 수 있도록<br />
         <BoldSpan>시간과 장소를</BoldSpan>부여해주세요
       </Paragraph>
-      <InputBox className={cx('plan-input')} inputItems={dummyInputItems} />
+      <div className={cx('input-area')}>
+        <TimeInput 
+          className={cx('time-input')}
+          onChange={onTimeChangeHandler}
+          value={planState.currentData.assignedTime}
+        />
+        <InputBox className={cx('place-input')} inputItems={items} />
+      </div>
     </div>
   );
 };

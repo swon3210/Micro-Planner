@@ -23,19 +23,17 @@ const SemiGoalInput = ({ className }: SemiGoalInputProps) => {
   const layoutAction = useLayoutAction();
   const planAction = usePlanAction();
   const planState = usePlanState();
-  const semiGoal = planState.currentData.semiGoal;
 
   useEffect(() => {
-    if (semiGoal.length !== 0) {
-      layoutAction.setLayoutButtonFuncAction(() => {planAction.setSemiGoalAction(semiGoal)});
+    if (planState.currentData.semiGoal.length !== 0) {
+      layoutAction.setLayoutButtonFuncAction(() => {planAction.setSemiGoalAction(planState.currentData.semiGoal)});
     } else {
       layoutAction.setLayoutButtonFuncAction(undefined);
     }
-  }, [semiGoal]);
+  }, [planState.currentData.semiGoal]);
 
-  // const dummyInputItems = ["하루에 글 5문단 쓰기"]
-  const dummyInputItems: InputObj[] = [
-    { id: 1, text: semiGoal, onChangeHandler: planAction.setSemiGoalAction},
+  const items: InputObj[] = [
+    { id: 1, text: planState.currentData.semiGoal, onChangeHandler: planAction.setSemiGoalAction},
   ]
 
   return (
@@ -45,7 +43,7 @@ const SemiGoalInput = ({ className }: SemiGoalInputProps) => {
         <BoldSpan>사소한 행동 패턴</BoldSpan>을 설정해<br />
         목표를 작게 쪼개주세요.
       </Paragraph>
-      <InputBox inputItems={dummyInputItems}/>
+      <InputBox inputItems={items}/>
     </div>
   );
 };

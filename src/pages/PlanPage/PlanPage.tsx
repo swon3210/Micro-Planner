@@ -24,6 +24,8 @@ const PlanPage = ({className}: PlanPageProps) => {
   }, []);
 
   const cardItems = planState.data;
+  
+  console.log('cardItems',cardItems);
 
   return (
     <div className={cx('plan-page', className)}>

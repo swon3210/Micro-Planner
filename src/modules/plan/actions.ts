@@ -22,7 +22,7 @@ export const setSemiGoal = createAction(
 )<string>();
 export const setAssignedTime = createAction(
   SET_ASSIGNED_TIME
-)<number>();
+)<string>();
 export const setAssignedPlace = createAction(
   SET_ASSIGNED_PLACE
 )<string>();

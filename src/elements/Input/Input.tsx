@@ -40,3 +40,20 @@ export const RoundRangeInput = styled.input.attrs({
     opacity: 1;
   }
 `;
+
+export const TimeInput = styled.input.attrs({
+  type: 'time'
+})`
+  font-family: 'MSBold', 'SpoqaBold';
+  color: var(--textColor-3);
+  font-size: 1rem;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+    margin-top: 1px;
+  }
+`;

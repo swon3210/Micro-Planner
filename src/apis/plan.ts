@@ -7,7 +7,7 @@ export interface Plan {
   userId: string | null | undefined;
   finalGoal: string;
   semiGoal: string;
-  assignedTime: number;
+  assignedTime: string;
   assignedPlace: string;
   assignedDays: Day[];
   progress: number;
