@@ -27,12 +27,14 @@ const PlanPeriodInput = ({ className }: PlanPeriodInputProps) => {
   const layoutAction = useLayoutAction();
 
   useEffect(() => {
-    if (planState.currentData.period !== 1) {
-      layoutAction.setLayoutButtonFuncAction(() => {planAction.setPeriodAction(planState.currentData.period)});
-    } else {
+    if (planState.currentData.period === 1) {
       layoutAction.setLayoutButtonFuncAction(undefined);
     }
-  }, [planState.currentData.period]);
+  }, []);
+
+  const onRangeChangeHandler = (value: number) => {
+    layoutAction.setLayoutButtonFuncAction(() => {planAction.setPeriodAction(value)});
+  }
 
   return (
     <div className={cx('plan-period-input', className)}>
@@ -45,7 +47,7 @@ const PlanPeriodInput = ({ className }: PlanPeriodInputProps) => {
         range={planState.currentData.period}
         className={cx('period-slider')}
         rangeDivider={10}
-        rangeSetter={planAction.setPeriodAction}
+        rangeSetter={onRangeChangeHandler}
       />
       <Graduations className={cx('period-graducations')} min={0} max={10} graduationDistance={2} />
     </div>

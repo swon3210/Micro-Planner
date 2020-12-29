@@ -3,11 +3,12 @@ import { db } from '../db/firestore';
 export type Day = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun';
 
 export interface Plan {
-  id: number | null | undefined;
+  id: number;
   userId: string | null | undefined;
   finalGoal: string;
   semiGoal: string;
-  assignedTime: string;
+  assignedStartTime: string;
+  assignedEndTime: string;
   assignedPlace: string;
   assignedDays: Day[];
   progress: number;

@@ -6,7 +6,6 @@ import { ExtraBoldHeading, Paragraph } from '../../elements/Text/Text';
 // Hooks
 import { useLayoutAction } from '../../hooks/layout';
 import { usePlanState, usePlanAction } from '../../hooks/plan';
-import { useLocation } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 

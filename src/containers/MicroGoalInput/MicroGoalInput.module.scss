@@ -11,20 +11,26 @@
     margin-bottom: 30px;
   }
 
+  .time-inputs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .time-input {
+    margin: 0px 10px 0px 10px;
+    background-color: var(--sub-color-1);
+  }
+
   .input-area {
     background-color: white;
     padding: 20px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .time-input {
-      font-size: 1.25rem;
-    }
-    
+
     .place-input {
       height: 70px;
     }
   }
-
-  
 }

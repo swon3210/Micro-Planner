@@ -12,10 +12,6 @@ import { Plan, Day } from '../../apis/plan';
 
 const cx = classNames.bind(styles);
 
-type PlanCardItem = {
-  id: string;
-};
-
 interface PlanCardListProps {
   items: Plan[];
   className?: string;
@@ -28,23 +24,45 @@ const PlanCardList = ({ className, items }: PlanCardListProps) => {
     const now = new Date();
     const then = new Date(item.timestamp);
     const daysPassed = now.getDate() - then.getDate();
-    const assignedTime = item.assignedTime.split(":");
-    const assignedHours = Number(assignedTime[0]);
-    const assignedMinutes = Number(assignedTime[1]);
+    const assignedStartTime = item.assignedStartTime.split(':');
+    const assignedStartHours = Number(assignedStartTime[0]);
+    const assignedStartMinutes = Number(assignedStartTime[1]);
+    const assignedEndTime = item.assignedEndTime.split(':');
+    const assignedEndHours = Number(assignedEndTime[0]);
+    const assignedEndMinutes = Number(assignedEndTime[1]);
 
     const today = days[now.getDay()];
 
-    if (item.assignedDays.includes(today)) {
-      let assignedHoursString = String(assignedHours);
-      let assignedMinutesString = String(assignedMinutes);
-      if (Number(assignedHoursString) < 10) {
-        assignedHoursString = '0' + assignedHoursString;
+    // 요일이 맞지 않음
+      let assignedStartHoursString = String(assignedStartHours);
+      let assignedStartMinutesString = String(assignedStartMinutes);
+      if (Number(assignedStartHoursString) < 10) {
+        assignedStartHoursString = '0' + assignedStartHoursString;
       }
-      if (Number(assignedMinutesString) < 10) {
-        assignedMinutesString = '0' + assignedMinutesString;
+      if (Number(assignedStartMinutesString) < 10) {
+        assignedStartMinutesString = '0' + assignedStartMinutesString;
       }
 
-      const hoursLeft = then.getHours() - Number(assignedHoursString);
+      let assignedEndHoursString = String(assignedEndHours);
+      let assignedEndMinutesString = String(assignedEndMinutes);
+      if (Number(assignedEndHoursString) < 10) {
+        assignedEndHoursString = '0' + assignedEndHoursString;
+      }
+      if (Number(assignedEndMinutesString) < 10) {
+        assignedEndMinutesString = '0' + assignedEndMinutesString;
+      }
+
+      const hoursLeft = then.getHours() - Number(assignedEndHoursString);
+
+      // 시간이 아직 안됬을 때
+      // if (now.getHours() == assignedHours && now.getMinutes() < assignedMinutes) {
+
+      // } else if (now.getHours() < assignedHours) {
+
+      // }
+
+      // // 현재가 수행 시간일 때
+      // if (now.get)
 
       const leftContent = (
         <div className={cx('plan-card-left-content')}>
@@ -53,7 +71,7 @@ const PlanCardList = ({ className, items }: PlanCardListProps) => {
               {item.semiGoal}
             </BoldHeading>
             <Paragraph className={cx('plan-when')}>
-              / {item.assignedTime}
+              / {item.assignedStartTime} - {item.assignedEndTime}
             </Paragraph>
             <Paragraph className={cx('plan-where')}>
               / {item.assignedPlace}
@@ -81,7 +99,7 @@ const PlanCardList = ({ className, items }: PlanCardListProps) => {
             </BoldHeading>
           </div>
           <Paragraph className={cx('remained-time')}>
-            {assignedHoursString}:{assignedMinutesString}
+            {assignedStartHoursString}:{assignedStartMinutesString}
           </Paragraph>
           <ColoredRoundedButton className={cx('toggle-button')}>
             <Paragraph className={cx('toggle-button-text')}>앞으로</Paragraph>
@@ -99,7 +117,7 @@ const PlanCardList = ({ className, items }: PlanCardListProps) => {
           rightContent={rightContent}
         />
       );
-    }
+    
   });
 
   return <div className={cx('plan-card-list', className)}>{cardItemList}</div>;

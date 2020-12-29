@@ -4,7 +4,8 @@ import {
   SET_PERIOD,
   SET_ASSIGNED_DAYS,
   SET_FINAL_GOAL,
-  SET_ASSIGNED_TIME,
+  SET_ASSIGNED_START_TIME,
+  SET_ASSIGNED_END_TIME,
   SET_ASSIGNED_PLACE,
   SET_PROGRESS,
   SET_SEMI_GOAL,
@@ -18,11 +19,12 @@ const initialState: PlanState = {
   data: [],
   currentData: {
     // id 가 '' 라는 것은 온라인 동기화가 이루어지지 않았다는 뜻이다.
-    id: null,
+    id: 0,
     userId: '',
     finalGoal: '',
     semiGoal: '',
-    assignedTime: '00:00',
+    assignedStartTime: '00:00',
+    assignedEndTime: '13:00',
     assignedPlace: '',
     assignedDays: [],
     timestamp: 0,
@@ -44,9 +46,14 @@ const plan = createReducer<PlanState, PlanAction>(initialState, {
     processed.currentData.semiGoal = action.payload;
     return processed;
   },
-  [SET_ASSIGNED_TIME]: (state, action) => {
+  [SET_ASSIGNED_START_TIME]: (state, action) => {
     const processed = { ...state };
-    processed.currentData.assignedTime = action.payload;
+    processed.currentData.assignedStartTime = action.payload;
+    return processed;
+  },
+  [SET_ASSIGNED_END_TIME]: (state, action) => {
+    const processed = { ...state };
+    processed.currentData.assignedEndTime = action.payload;
     return processed;
   },
   [SET_ASSIGNED_PLACE]: (state, action) => {

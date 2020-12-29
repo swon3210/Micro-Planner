@@ -16,7 +16,6 @@ import { usePlanState, usePlanAction } from '../../hooks/plan';
 
 const cx = classNames.bind(styles);
 
-
 export interface FinalGoalInputProps {
   className?: string;
 }
@@ -27,17 +26,22 @@ const FinalGoalInput = ({ className }: FinalGoalInputProps) => {
   const planState = usePlanState();
 
   useEffect(() => {
-    if (planState.currentData.finalGoal.length !== 0) {
-      layoutAction.setLayoutButtonFuncAction(() => {planAction.setFinalGoalAction(planState.currentData.finalGoal)});
-    } else {
+    if (planState.currentData.finalGoal.length === 0) {
       layoutAction.setLayoutButtonFuncAction(undefined);
     }
-  }, [planState.currentData.finalGoal]);
-  const items: InputObj[] = [{
-    id: 1,
-    text: planState.currentData.finalGoal,
-    onChangeHandler: planAction.setFinalGoalAction
-  }]
+  }, []);
+  const items: InputObj[] = [
+    {
+      id: 1,
+      text: planState.currentData.finalGoal,
+      onChangeHandler: (value: string) => {
+        planAction.setFinalGoalAction(value);
+        layoutAction.setLayoutButtonFuncAction(() => {
+          planAction.setFinalGoalAction(planState.currentData.finalGoal);
+        });
+      },
+    },
+  ];
   // const planAction = usePlanAction();
 
   return (
@@ -47,7 +51,7 @@ const FinalGoalInput = ({ className }: FinalGoalInputProps) => {
         <BoldSpan>마지막</BoldSpan>으로 달성하고 싶은 <br />
         가장 <BoldSpan>최종적인 목표</BoldSpan>를 적어주세요
       </Paragraph>
-      <InputBox inputItems={items}/>
+      <InputBox inputItems={items} />
     </div>
   );
 };
