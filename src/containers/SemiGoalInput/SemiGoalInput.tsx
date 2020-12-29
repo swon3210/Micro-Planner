@@ -25,15 +25,16 @@ const SemiGoalInput = ({ className }: SemiGoalInputProps) => {
   const planState = usePlanState();
 
   useEffect(() => {
-    if (planState.currentData.semiGoal.length !== 0) {
-      layoutAction.setLayoutButtonFuncAction(() => {planAction.setSemiGoalAction(planState.currentData.semiGoal)});
-    } else {
+    if (planState.currentData.semiGoal.length === 0) {
       layoutAction.setLayoutButtonFuncAction(undefined);
     }
-  }, [planState.currentData.semiGoal]);
+  }, []);
 
   const items: InputObj[] = [
-    { id: 1, text: planState.currentData.semiGoal, onChangeHandler: planAction.setSemiGoalAction},
+    { id: 1, text: planState.currentData.semiGoal, onChangeHandler: (value) => {
+      planAction.setSemiGoalAction(value);
+      layoutAction.setLayoutButtonFuncAction(() => {planAction.setSemiGoalAction(planState.currentData.semiGoal)});
+    } },
   ]
 
   return (

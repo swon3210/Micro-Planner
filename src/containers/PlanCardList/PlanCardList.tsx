@@ -31,9 +31,10 @@ const PlanCardList = ({ className, items }: PlanCardListProps) => {
     const assignedEndHours = Number(assignedEndTime[0]);
     const assignedEndMinutes = Number(assignedEndTime[1]);
 
-    const today = days[now.getDay()];
+    const isToday = days[now.getDay()];
 
     // 요일이 맞지 않음
+    if (isToday) {
       let assignedStartHoursString = String(assignedStartHours);
       let assignedStartMinutesString = String(assignedStartMinutes);
       if (Number(assignedStartHoursString) < 10) {
@@ -52,7 +53,7 @@ const PlanCardList = ({ className, items }: PlanCardListProps) => {
         assignedEndMinutesString = '0' + assignedEndMinutesString;
       }
 
-      const hoursLeft = then.getHours() - Number(assignedEndHoursString);
+      const hoursLeft = Number(assignedStartHoursString) - now.getHours();
 
       // 시간이 아직 안됬을 때
       // if (now.getHours() == assignedHours && now.getMinutes() < assignedMinutes) {
@@ -117,7 +118,7 @@ const PlanCardList = ({ className, items }: PlanCardListProps) => {
           rightContent={rightContent}
         />
       );
-    
+    }
   });
 
   return <div className={cx('plan-card-list', className)}>{cardItemList}</div>;
