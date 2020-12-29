@@ -18,7 +18,7 @@ export interface InputBoxProps {
 const InputBox = ({className, inputItems}: InputBoxProps) => {
 
   const inputElements = inputItems.map(item => {
-    return <textarea key={item.id} onChange={(event) => item.onChangeHandler(event.currentTarget.value)} placeholder={item.text} className={cx('text-input')}></textarea>
+    return <textarea key={item.id} onChange={(event) => item.onChangeHandler(event.target.value)} placeholder={item.text} className={cx('text-input')}></textarea>
   })
 
   return (

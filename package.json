@@ -17,6 +17,7 @@
     "@types/styled-components": "^5.1.1",
     "classnames": "^2.2.6",
     "firebase": "^7.17.1",
+    "idb": "^5.0.8",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

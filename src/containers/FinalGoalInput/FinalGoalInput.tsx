@@ -16,7 +16,6 @@ import { usePlanState, usePlanAction } from '../../hooks/plan';
 
 const cx = classNames.bind(styles);
 
-
 export interface FinalGoalInputProps {
   className?: string;
 }
@@ -25,20 +24,24 @@ const FinalGoalInput = ({ className }: FinalGoalInputProps) => {
   const layoutAction = useLayoutAction();
   const planAction = usePlanAction();
   const planState = usePlanState();
-  const finalGoal = planState.currentData.finalGoal;
 
   useEffect(() => {
-    if (finalGoal.length !== 0) {
-      layoutAction.setLayoutButtonFuncAction(() => {planAction.setFinalGoalAction(finalGoal)});
-    } else {
+    if (planState.currentData.finalGoal.length === 0) {
       layoutAction.setLayoutButtonFuncAction(undefined);
     }
-  }, [finalGoal]);
-  const dummyInputItems: InputObj[] = [{
-    id: 1,
-    text: finalGoal,
-    onChangeHandler: planAction.setFinalGoalAction
-  }]
+  }, []);
+  const items: InputObj[] = [
+    {
+      id: 1,
+      text: planState.currentData.finalGoal,
+      onChangeHandler: (value: string) => {
+        planAction.setFinalGoalAction(value);
+        layoutAction.setLayoutButtonFuncAction(() => {
+          planAction.setFinalGoalAction(planState.currentData.finalGoal);
+        });
+      },
+    },
+  ];
   // const planAction = usePlanAction();
 
   return (
@@ -48,7 +51,7 @@ const FinalGoalInput = ({ className }: FinalGoalInputProps) => {
         <BoldSpan>마지막</BoldSpan>으로 달성하고 싶은 <br />
         가장 <BoldSpan>최종적인 목표</BoldSpan>를 적어주세요
       </Paragraph>
-      <InputBox inputItems={dummyInputItems}/>
+      <InputBox inputItems={items} />
     </div>
   );
 };

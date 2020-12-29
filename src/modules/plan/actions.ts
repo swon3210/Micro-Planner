@@ -4,7 +4,8 @@ import { Day, Plan } from '../../apis/plan';
 // 액션 타입
 export const SET_FINAL_GOAL = "plan/SET_FINAL_GOAL";
 export const SET_SEMI_GOAL = "plan/SET_SEMI_GOAL";
-export const SET_ASSIGNED_TIME = "plan/SET_ASSIGNED_TIME";
+export const SET_ASSIGNED_START_TIME = "plan/SET_ASSIGNED_START_TIME";
+export const SET_ASSIGNED_END_TIME = "plan/SET_ASSIGNED_END_TIME";
 export const SET_ASSIGNED_PLACE = "plan/SET_ASSIGNED_PLACE";
 export const SET_ASSIGNED_DAYS = "plan/SET_ASSIGNED_DAYS";
 export const SET_PROGRESS = "plan/PROGRESS"
@@ -20,9 +21,12 @@ export const setFinalGoal = createAction(
 export const setSemiGoal = createAction(
   SET_SEMI_GOAL
 )<string>();
-export const setAssignedTime = createAction(
-  SET_ASSIGNED_TIME
-)<number>();
+export const setAssignedStartTime = createAction(
+  SET_ASSIGNED_START_TIME
+)<string>();
+export const setAssignedEndTime = createAction(
+  SET_ASSIGNED_END_TIME
+)<string>();
 export const setAssignedPlace = createAction(
   SET_ASSIGNED_PLACE
 )<string>();

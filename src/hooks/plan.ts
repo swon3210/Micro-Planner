@@ -6,13 +6,15 @@ import {
   setFinalGoal,
   setSemiGoal,
   setAssignedPlace,
+  setAssignedStartTime,
+  setAssignedEndTime,
   setAssignedDays,
   setProgress,
   setPeriod,
   addPlan,
-  setAllPlan
+  setAllPlan,
 } from '../modules/plan/actions';
-import { createPlanObject, readAllPlanObjects } from '../db/indexedDB';
+import offlineDB from '../db/indexedDB';
 
 export const usePlanState = () => {
   const { data, currentData } = useSelector((state: RootState) => state.plan);
@@ -40,14 +42,19 @@ export const usePlanAction = () => {
     [dispatch]
   );
 
-  // const setAssignedTimeAction = useCallback(
-  //   // timeText 형식 : 오후 7:00 에
-  //   (timeText: string) => {
-  //     let parsed = timeText.split(':');
-  //     return dispatch(setAssignedTime(payload));
-  //   },
-  //   [dispatch]
-  // );
+  const setAssignedStartTimeAction = useCallback(
+    (payload: string) => {
+      return dispatch(setAssignedStartTime(payload));
+    },
+    [dispatch]
+  );
+
+  const setAssignedEndTimeAction = useCallback(
+    (payload: string) => {
+      return dispatch(setAssignedEndTime(payload));
+    },
+    [dispatch]
+  );
 
   const setAssignedPlaceAction = useCallback(
     (payload: string) => {
@@ -79,45 +86,27 @@ export const usePlanAction = () => {
 
   const addPlanAction = useCallback(
     (payload: Plan) => {
-      dispatch(addPlan(payload));
-      return createPlanObject(payload);
+      offlineDB.addPlan(payload);
+      return dispatch(addPlan(payload));
     },
     [dispatch]
   );
 
-  const getAllPlanAction = useCallback(() => {
-    const request = window.indexedDB.open('planDatabase', 1);
-    let db;
-    request.onsuccess = function (event) {
-      db = request.result;
-      console.log('스토어 접근 성공', event);
-      const transaction = db.transaction('planStore', 'readwrite');
-      const store = transaction.objectStore('planStore');
-      const readAllRequest = store.getAll();
-      readAllRequest.onerror = function (error) {
-        console.log('error : ', (error.target as any).error);
-      };
-      readAllRequest.onsuccess = function (event) {
-        const result = (event.target as any).result;
-        console.log('result : ', result);
-        return dispatch(setAllPlan(result));
-      };
-    };
-    request.onerror = function (error) {
-      console.log('에러 발생 : ', (error.target as any).error);
-    };
-    // return dispatch(setAllPlan(allPlan));
-  }, [dispatch])
+  const getAllPlanAction = useCallback(async () => {
+    const allPlans = await offlineDB.getAllPlans();
+    return dispatch(setAllPlan(allPlans));
+  }, [dispatch]);
 
   return {
     setFinalGoalAction,
     setSemiGoalAction,
-    // setAssignedTimeAction,
+    setAssignedStartTimeAction,
+    setAssignedEndTimeAction,
     setAssignedPlaceAction,
     setAssignedDaysAction,
     setProgressAction,
     setPeriodAction,
     addPlanAction,
-    getAllPlanAction
+    getAllPlanAction,
   };
 };

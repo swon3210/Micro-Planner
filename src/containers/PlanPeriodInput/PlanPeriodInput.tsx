@@ -25,15 +25,16 @@ const PlanPeriodInput = ({ className }: PlanPeriodInputProps) => {
   const planAction = usePlanAction();
   const planState = usePlanState();
   const layoutAction = useLayoutAction();
-  const period = planState.currentData.period;
 
   useEffect(() => {
-    if (period !== 1) {
-      layoutAction.setLayoutButtonFuncAction(() => {planAction.setPeriodAction(period)});
-    } else {
+    if (planState.currentData.period === 1) {
       layoutAction.setLayoutButtonFuncAction(undefined);
     }
-  }, [period]);
+  }, []);
+
+  const onRangeChangeHandler = (value: number) => {
+    layoutAction.setLayoutButtonFuncAction(() => {planAction.setPeriodAction(value)});
+  }
 
   return (
     <div className={cx('plan-period-input', className)}>
@@ -43,10 +44,10 @@ const PlanPeriodInput = ({ className }: PlanPeriodInputProps) => {
         뚜렷한 목표는 <BoldSpan>수월한 달성</BoldSpan>을 도와준답니다.
       </Paragraph>
       <Slider
-        range={period}
+        range={planState.currentData.period}
         className={cx('period-slider')}
         rangeDivider={10}
-        rangeSetter={planAction.setPeriodAction}
+        rangeSetter={onRangeChangeHandler}
       />
       <Graduations className={cx('period-graducations')} min={0} max={10} graduationDistance={2} />
     </div>

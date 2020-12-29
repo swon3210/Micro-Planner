@@ -57,7 +57,7 @@ const AssignedDaysInput = ({ className }: AssignedDaysInputProps) => {
 
   const dayRatioItems = days.map((item) => {
     return (
-      <div className={cx('ratio-item')}>
+      <div className={cx('ratio-item')} key={item}>
         <Ratio
           clicked={assignedDays.includes(item) ? true : false}
           onClick={() => clickRatioHandler(item)}

@@ -1,44 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 프로그램 소개
 
-## Available Scripts
+개인적으로 개발한 아주 간단한 플래너 어플리케이션입니다. 최종목표 -> 세부목표 -> 장소, 시간 -> 실천기간의 순서대로 체계적으로 목표를 세워갈 수 있습니다.
+아래의 디자인을 기반으로 제작되었으며 디자이너분(https://notefolio.net/rhdemfl)의 양해를 구했습니다.
 
-In the project directory, you can run:
+<br>
 
-### `yarn start`
+https://xd.adobe.com/view/00f5436d-3b45-4649-5def-9139c6d0851a-76c4/
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br><br>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# 기능 소개
 
-### `yarn test`
+## 계획 블록 만들기
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 최종목표 설정
+- 세부목표 설정
+- 장소, 시간 설정
+- 실천 기간 설정
 
-### `yarn build`
+## 계획들 조회하기
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 오늘 해야할 계획만 조회
+- 지금 해야할 계획을 표시
+- 실천 기간까지 남은 시간을 조회
+- 전체 계획을 조회
+- 지금까지 완료해온 계획들을 조회
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 계획 삭제/중지시키기
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 마음에 들지 않는 계획 삭제 및 중단시키기
 
-### `yarn eject`
+<br><br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# 적용 기술들
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Indexed DB
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+별도의 백엔드 연동 없이 브라우저의 indexeddb 를 데이터베이스로 하여 오프라인으로도 사용 가능하도록 만들었습니다.
 
-## Learn More
+## PWA
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+PWA를 적용하여 가장 최근의 웹 자원을 바탕으로 별도의 로딩 없이 서비스를 이용할 수 있도록 만들었습니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Typescript
+
+모든 코드와 테스트 코드는 타입스크립트로 작성되었습니다.
+
+## 기타
+
+- 모든 CSS는 별도의 라이브러리 없이 SCSS(SASS)로 작성되었습니다.
+- ATOMIC DESIGN 패턴을 바탕으로 컴포넌트를 제작하고 페이지를 구성하였습니다.

@@ -12,7 +12,7 @@ export interface SliderProps {
   className?: string;
 }
 
-const Slider = ({className, range, rangeSetter, rangeDivider}: SliderProps) => {
+const Slider = ({className, rangeSetter, rangeDivider}: SliderProps) => {
 
   const [isMovable, setIsMovable] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
